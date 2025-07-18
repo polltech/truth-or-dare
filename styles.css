@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+#intro-screen {
+    background-color: #f0f8ff;
+    border: 2px solid #00008b;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+#game-screen {
+    background-color: #fff;
+    border: 2px solid #ff4500;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+#question-text {
+    transition: all 0.3s ease-in-out;
+}
+
+.btn {
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
