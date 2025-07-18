@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const questionText = document.getElementById('question-text');
 
     let lastPrompt = {};
+    const promptHistory = {
+        truth: [],
+        dare: []
+    };
+    const HISTORY_LIMIT = 100;
 
     const allPrompts = {
         truth: truths,
@@ -45,9 +50,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function getQuestion(type) {
         const categories = Object.keys(allPrompts[type]);
-        const randomCategoryName = categories[Math.floor(Math.random() * categories.length)];
-        const questionsInCategory = allPrompts[type][randomCategoryName];
-        const randomQuestion = questionsInCategory[Math.floor(Math.random() * questionsInCategory.length)];
+        let randomCategoryName, randomQuestion;
+
+        do {
+            randomCategoryName = categories[Math.floor(Math.random() * categories.length)];
+            const questionsInCategory = allPrompts[type][randomCategoryName];
+            randomQuestion = questionsInCategory[Math.floor(Math.random() * questionsInCategory.length)];
+        } while (promptHistory[type].includes(randomQuestion));
+
+        promptHistory[type].push(randomQuestion);
+        if (promptHistory[type].length > HISTORY_LIMIT) {
+            promptHistory[type].shift();
+        }
 
         lastPrompt = {
             type: type.charAt(0).toUpperCase() + type.slice(1),
