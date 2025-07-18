@@ -16,23 +16,68 @@ document.addEventListener('DOMContentLoaded', () => {
     let longPressTimer;
 
     const truths = {
-        'Light & Funny': Array.from({ length: 200 }, (_, i) => `Light & Funny Truth ${i + 1}`),
-        'Embarrassing 😳': Array.from({ length: 200 }, (_, i) => `Embarrassing Truth ${i + 1}`),
-        'Bold 🔥': Array.from({ length: 200 }, (_, i) => `Bold Truth ${i + 1}`),
-        'Group Play 🎯': Array.from({ length: 200 }, (_, i) => `Group Play Truth ${i + 1}`),
-        'Relationship': Array.from({ length: 200 }, (_, i) => `Relationship Truth ${i + 1}`),
+        'Light & Funny': [
+            "Have you ever lied to get out of trouble?",
+            "What’s your most irrational fear?",
+            "Have you ever stalked someone online?",
+            "What’s something you hate but pretend to like?",
+        ],
+        'Embarrassing 😳': [
+            "What’s one secret you’ve never told anyone?",
+            "If you could be invisible, what would you do?",
+            "Have you ever broken someone’s heart?",
+            "Who was your first crush and why?",
+            "What’s your biggest insecurity?",
+            "What’s something illegal you’ve done?",
+        ],
+        'Bold 🔥': [
+            "What’s one secret you’ve never told anyone?",
+            "If you could be invisible, what would you do?",
+            "Have you ever broken someone’s heart?",
+            "Who was your first crush and why?",
+            "What’s your biggest insecurity?",
+        ],
+        'Group Play 🎯': [
+            "Have you ever lied to get out of trouble?",
+            "What’s your most irrational fear?",
+            "Have you ever stalked someone online?",
+        ],
+        'Relationship': [
+            "Have you ever broken someone’s heart?",
+            "Who was your first crush and why?",
+            "What’s your biggest insecurity?",
+        ]
     };
 
     const dares = {
-        'Light & Funny': Array.from({ length: 200 }, (_, i) => `Light & Funny Dare ${i + 1}`),
-        'Embarrassing 😳': Array.from({ length: 200 }, (_, i) => `Embarrassing Dare ${i + 1}`),
-        'Bold 🔥': Array.from({ length: 200 }, (_, i) => `Bold Dare ${i + 1}`),
-        'Group Play 🎯': Array.from({ length: 200 }, (_, i) => `Group Play Dare ${i + 1}`),
-        'Relationship': Array.from({ length: 200 }, (_, i) => `Relationship Dare ${i + 1}`),
+        'Light & Funny': [
+            "Speak without using the letter 'E' for 1 minute.",
+            "Pretend you're a cat for 2 minutes.",
+            "Dance like a chicken for 30 seconds.",
+            "Try to lick your elbow.",
+        ],
+        'Embarrassing 😳': [
+            "Share the most embarrassing photo in your gallery.",
+            "Send a voice note saying 'I love cheese more than life.'",
+            "Post 'I’m weird and proud' on your WhatsApp status for 1 hour.",
+        ],
+        'Bold 🔥': [
+            "Change your profile name to 'Dare King/Queen' for 24 hours.",
+            "Call your best friend and speak in song lyrics for 1 minute.",
+            "Text your crush 'I dreamt about you last night.'",
+        ],
+        'Group Play 🎯': [
+            "Speak without using the letter 'E' for 1 minute.",
+            "Pretend you're a cat for 2 minutes.",
+            "Dance like a chicken for 30 seconds.",
+        ],
+        'Relationship': [
+            "Text your crush 'I dreamt about you last night.'",
+        ]
     };
 
-    const truths18plus = Array.from({ length: 100 }, (_, i) => `18+ Truth ${i + 1}`);
-    const dares18plus = Array.from({ length: 100 }, (_, i) => `18+ Dare ${i + 1}`);
+    const truths18plus = [];
+    const dares18plus = [];
 
     let usedTruths = [];
     let usedDares = [];
