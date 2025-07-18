@@ -4,59 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Truth or Dare</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-gray-200 dark:bg-gray-900 text-gray-900 dark:text-white">
-    <div class="container mx-auto p-4">
-        <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold">🇰🇪 Truth or Dare Kenya Edition</h1>
+<body>
+    <div class="container">
+        <header>
+            <h1>Truth or Dare</h1>
         </header>
 
-        <div id="menu-screen" class="text-center">
-            <button id="start-game-menu" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Start Game
-            </button>
+        <div id="menu-screen">
+            <button id="start-game-menu">Start Game</button>
         </div>
 
-        <div id="game-screen" class="hidden">
-            <div id="question-card" class="bg-white/30 dark:bg-gray-800/30 backdrop-blur-md rounded-xl shadow-lg p-8 transition-all duration-300">
-                <div id="question-category" class="text-xl font-bold mb-4"></div>
-                <div id="question-text" class="text-2xl min-h-[150px] flex items-center justify-center"></div>
+        <div id="game-screen" style="display: none;">
+            <div id="question-card">
+                <div id="question-category"></div>
+                <div id="question-text">Choose Truth, Dare, or Random!</div>
             </div>
 
-            <div class="flex justify-center space-x-4 mt-8">
-                <button id="truth-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-md transform hover:scale-105 transition-transform">
-                    Truth ❓
-                </button>
-                <button id="dare-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full shadow-md transform hover:scale-105 transition-transform">
-                    Dare 😈
-                </button>
+            <div class="buttons-container">
+                <button id="truth-btn" class="btn">Truth</button>
+                <button id="dare-btn" class="btn">Dare</button>
+                <button id="random-btn" class="btn">Random</button>
             </div>
-            <div class="flex justify-center space-x-4 mt-4">
-                <button id="next-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full shadow-md transform hover:scale-105 transition-transform">
-                    Next 🎯
-                </button>
-                <button id="share-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow-md transform hover:scale-105 transition-transform">
-                    Share 💬
-                </button>
-                <button id="back-to-menu" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full shadow-md transform hover:scale-105 transition-transform">
-                    Back to Menu
-                </button>
-            </div>
-            <div class="flex justify-center mt-8">
-                <button id="unlock-18-plus" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full shadow-md transform hover:scale-105 transition-transform">
-                    Unlock 18+ 🔞 (Hold 3s)
-                </button>
-            </div>
-        </div>
 
-        <div class="absolute top-4 right-4">
-            <button id="theme-toggle" class="text-2xl">🌙</button>
+            <div class="secondary-buttons">
+                <button id="share-btn" class="secondary-btn">Share</button>
+            </div>
         </div>
     </div>
-    <canvas id="confetti-canvas" class="absolute top-0 left-0 w-full h-full pointer-events-none"></canvas>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+
+    <button id="theme-toggle">🌙</button>
+
+    <script src="prompts/truths.js"></script>
+    <script src="prompts/dares.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
