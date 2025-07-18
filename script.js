@@ -1,81 +1,93 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const introScreen = document.getElementById('intro-screen');
+    const menuScreen = document.getElementById('menu-screen');
     const gameScreen = document.getElementById('game-screen');
-    const startGameBtn = document.getElementById('start-game');
-    const playerNameInput = document.getElementById('player-name');
+    const startGameMenuBtn = document.getElementById('start-game-menu');
     const truthBtn = document.getElementById('truth-btn');
     const dareBtn = document.getElementById('dare-btn');
     const nextBtn = document.getElementById('next-btn');
-    const shareBtn = document.getElementById('share-btn');
-    const romanticLockBtn = document.getElementById('romantic-lock');
+    const backToMenuBtn = document.getElementById('back-to-menu');
+    const unlock18PlusBtn = document.getElementById('unlock-18-plus');
     const questionCategory = document.getElementById('question-category');
     const questionText = document.getElementById('question-text');
+    const themeToggle = document.getElementById('theme-toggle');
 
-    let playerName = '';
-    let romanticUnlocked = false;
+    let eighteenPlusUnlocked = false;
     let dareCount = 0;
     let longPressTimer;
 
     const truths = {
-        fun: Array.from({ length: 200 }, (_, i) => `Fun Truth ${i + 1}`),
-        embarrassing: Array.from({ length: 200 }, (_, i) => `Embarrassing Truth ${i + 1}`),
-        daring: Array.from({ length: 200 }, (_, i) => `Daring Truth ${i + 1}`),
-        deep: Array.from({ length: 200 }, (_, i) => `Deep Truth ${i + 1}`),
-        group: Array.from({ length: 200 }, (_, i) => `Group Truth ${i + 1}`),
+        'Light & Funny': Array.from({ length: 200 }, (_, i) => `Light & Funny Truth ${i + 1}`),
+        'Embarrassing 😳': Array.from({ length: 200 }, (_, i) => `Embarrassing Truth ${i + 1}`),
+        'Bold 🔥': Array.from({ length: 200 }, (_, i) => `Bold Truth ${i + 1}`),
+        'Group Play 🎯': Array.from({ length: 200 }, (_, i) => `Group Play Truth ${i + 1}`),
+        'Relationship': Array.from({ length: 200 }, (_, i) => `Relationship Truth ${i + 1}`),
     };
 
     const dares = {
-        fun: Array.from({ length: 200 }, (_, i) => `Fun Dare ${i + 1}`),
-        embarrassing: Array.from({ length: 200 }, (_, i) => `Embarrassing Dare ${i + 1}`),
-        daring: Array.from({ length: 200 }, (_, i) => `Daring Dare ${i + 1}`),
-        deep: Array.from({ length: 200 }, (_, i) => `Deep Dare ${i + 1}`),
-        group: Array.from({ length: 200 }, (_, i) => `Group Dare ${i + 1}`),
+        'Light & Funny': Array.from({ length: 200 }, (_, i) => `Light & Funny Dare ${i + 1}`),
+        'Embarrassing 😳': Array.from({ length: 200 }, (_, i) => `Embarrassing Dare ${i + 1}`),
+        'Bold 🔥': Array.from({ length: 200 }, (_, i) => `Bold Dare ${i + 1}`),
+        'Group Play 🎯': Array.from({ length: 200 }, (_, i) => `Group Play Dare ${i + 1}`),
+        'Relationship': Array.from({ length: 200 }, (_, i) => `Relationship Dare ${i + 1}`),
     };
 
-    const romanticTruths = Array.from({ length: 100 }, (_, i) => `Romantic Truth ${i + 1}`);
-    const romanticDares = Array.from({ length: 100 }, (_, i) => `Romantic Dare ${i + 1}`);
+    const truths18plus = Array.from({ length: 100 }, (_, i) => `18+ Truth ${i + 1}`);
+    const dares18plus = Array.from({ length: 100 }, (_, i) => `18+ Dare ${i + 1}`);
 
     let usedTruths = [];
     let usedDares = [];
 
-    startGameBtn.addEventListener('click', () => {
-        playerName = playerNameInput.value.trim();
-        introScreen.classList.add('hidden');
+    startGameMenuBtn.addEventListener('click', () => {
+        menuScreen.classList.add('hidden');
         gameScreen.classList.remove('hidden');
-        if (playerName) {
-            questionText.textContent = `Welcome, ${playerName}! Choose Truth or Dare.`;
-        } else {
-            questionText.textContent = 'Welcome! Choose Truth or Dare.';
-        }
+        questionText.textContent = 'Choose Truth or Dare.';
+    });
+
+    backToMenuBtn.addEventListener('click', () => {
+        gameScreen.classList.add('hidden');
+        menuScreen.classList.remove('hidden');
     });
 
     truthBtn.addEventListener('click', () => getQuestion('truth'));
     dareBtn.addEventListener('click', () => getQuestion('dare'));
     nextBtn.addEventListener('click', () => {
-        questionCategory.textContent = '';
+        questionCategory.innerHTML = '';
         questionText.textContent = 'Choose Truth or Dare.';
     });
 
     function getQuestion(type) {
         let category, question;
-        const availableCategories = romanticUnlocked ? {...truths, romantic: romanticTruths} : truths;
-        const categories = Object.keys(availableCategories);
+        let availableCategories, available18Plus;
 
+        if (type === 'truth') {
+            availableCategories = truths;
+            available18Plus = truths18plus;
+        } else {
+            availableCategories = dares;
+            available18Plus = dares18plus;
+        }
+
+        let allCategories = { ...availableCategories };
+        if (eighteenPlusUnlocked) {
+            allCategories['18+ 🔞'] = available18Plus;
+        }
+
+        const categories = Object.keys(allCategories);
+
+        let questionBank;
         if (type === 'truth') {
             do {
                 category = categories[Math.floor(Math.random() * categories.length)];
-                const questions = availableCategories[category];
-                question = questions[Math.floor(Math.random() * questions.length)];
+                questionBank = allCategories[category];
+                question = questionBank[Math.floor(Math.random() * questionBank.length)];
             } while (usedTruths.includes(question));
             usedTruths.push(question);
             if (usedTruths.length === 1000) usedTruths = [];
         } else {
-            const availableDareCategories = romanticUnlocked ? {...dares, romantic: romanticDares} : dares;
-            const dareCategories = Object.keys(availableDareCategories);
             do {
-                category = dareCategories[Math.floor(Math.random() * dareCategories.length)];
-                const questions = availableDareCategories[category];
-                question = questions[Math.floor(Math.random() * questions.length)];
+                category = categories[Math.floor(Math.random() * categories.length)];
+                questionBank = allCategories[category];
+                question = questionBank[Math.floor(Math.random() * questionBank.length)];
             } while (usedDares.includes(question));
             usedDares.push(question);
             if (usedDares.length === 1000) usedDares = [];
@@ -85,9 +97,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        questionCategory.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+        questionCategory.innerHTML = `<span class="category-title">${category}</span>`;
         questionText.textContent = question;
+        document.getElementById('question-card').classList.add('animate-fade-in');
+        setTimeout(() => {
+            document.getElementById('question-card').classList.remove('animate-fade-in');
+        }, 500);
     }
+
+    const shareBtn = document.getElementById('share-btn');
+    const audio = new Audio('https://www.soundjay.com/buttons/sounds/button-16.mp3');
 
     shareBtn.addEventListener('click', () => {
         const text = `Truth or Dare: ${questionText.textContent}`;
@@ -95,24 +114,35 @@ document.addEventListener('DOMContentLoaded', () => {
         window.open(url, '_blank');
     });
 
-    romanticLockBtn.addEventListener('mousedown', startLongPress);
-    romanticLockBtn.addEventListener('touchstart', startLongPress);
-    romanticLockBtn.addEventListener('mouseup', cancelLongPress);
-    romanticLockBtn.addEventListener('mouseleave', cancelLongPress);
-    romanticLockBtn.addEventListener('touchend', cancelLongPress);
+    document.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => {
+            audio.play();
+        });
+    });
+
+    unlock18PlusBtn.addEventListener('mousedown', startLongPress);
+    unlock18PlusBtn.addEventListener('touchstart', startLongPress);
+    unlock18PlusBtn.addEventListener('mouseup', cancelLongPress);
+    unlock18PlusBtn.addEventListener('mouseleave', cancelLongPress);
+    unlock18PlusBtn.addEventListener('touchend', cancelLongPress);
 
     function startLongPress(e) {
         e.preventDefault();
         longPressTimer = setTimeout(() => {
-            romanticUnlocked = true;
-            romanticLockBtn.textContent = 'Romantic 🔞 Unlocked!';
-            romanticLockBtn.classList.add('bg-green-500');
-            romanticLockBtn.disabled = true;
-            alert('Romantic category unlocked!');
+            eighteenPlusUnlocked = true;
+            unlock18PlusBtn.textContent = '18+ Unlocked!';
+            unlock18PlusBtn.classList.add('bg-green-500');
+            unlock18PlusBtn.disabled = true;
+            alert('18+ category unlocked!');
         }, 3000);
     }
 
     function cancelLongPress() {
         clearTimeout(longPressTimer);
     }
+
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        themeToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    });
 });

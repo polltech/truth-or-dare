@@ -7,42 +7,52 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-white">
-    <div class="absolute top-0 left-0 p-4">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Kenya.svg/1200px-Flag_of_Kenya.svg.png" alt="Kenya Flag" class="h-12">
-    </div>
-    <div id="intro-screen" class="container mx-auto p-4 text-center mt-20">
-        <h1 class="text-4xl font-bold mb-4 text-red-600">🔥 Karibu! Welcome to the Ultimate Truth or Dare Game!</h1>
-        <p class="text-blue-800 mb-4">Ready for some fun? Enter your name to get started!</p>
-        <input type="text" id="player-name" placeholder="Enter Player Name (optional)" class="p-2 border-2 border-blue-800 rounded mb-4 w-1/2">
-        <button id="start-game" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded btn">
-            Let's Go!
-        </button>
-    </div>
+<body class="bg-gray-200 dark:bg-gray-900 text-gray-900 dark:text-white">
+    <div class="container mx-auto p-4">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold">🇰🇪 Truth or Dare Kenya Edition</h1>
+        </header>
 
-    <div id="game-screen" class="container mx-auto p-4 text-center hidden mt-10">
-        <div id="question-category" class="text-lg font-bold mb-2 text-blue-800"></div>
-        <div id="question-text" class="text-2xl mb-4 p-6 bg-gray-100 rounded-lg min-h-[100px] flex items-center justify-center"></div>
-        <div class="flex justify-center space-x-4">
-            <button id="truth-btn" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-full btn text-xl">
-                Truth ❓
-            </button>
-            <button id="dare-btn" class="bg-red-600 hover:bg-red-800 text-white font-bold py-3 px-6 rounded-full btn text-xl">
-                Dare 😈
+        <div id="menu-screen" class="text-center">
+            <button id="start-game-menu" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Start Game
             </button>
         </div>
-        <div class="mt-6">
-            <button id="next-btn" class="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded btn">
-                Next 🎯
-            </button>
-            <button id="share-btn" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded btn">
-                Share on WhatsApp 💬
-            </button>
+
+        <div id="game-screen" class="hidden">
+            <div id="question-card" class="bg-white/30 dark:bg-gray-800/30 backdrop-blur-md rounded-xl shadow-lg p-8 transition-all duration-300">
+                <div id="question-category" class="text-xl font-bold mb-4"></div>
+                <div id="question-text" class="text-2xl min-h-[150px] flex items-center justify-center"></div>
+            </div>
+
+            <div class="flex justify-center space-x-4 mt-8">
+                <button id="truth-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-md transform hover:scale-105 transition-transform">
+                    Truth ❓
+                </button>
+                <button id="dare-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full shadow-md transform hover:scale-105 transition-transform">
+                    Dare 😈
+                </button>
+            </div>
+            <div class="flex justify-center space-x-4 mt-4">
+                <button id="next-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full shadow-md transform hover:scale-105 transition-transform">
+                    Next 🎯
+                </button>
+                <button id="share-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow-md transform hover:scale-105 transition-transform">
+                    Share 💬
+                </button>
+                <button id="back-to-menu" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full shadow-md transform hover:scale-105 transition-transform">
+                    Back to Menu
+                </button>
+            </div>
+            <div class="flex justify-center mt-8">
+                <button id="unlock-18-plus" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full shadow-md transform hover:scale-105 transition-transform">
+                    Unlock 18+ 🔞 (Hold 3s)
+                </button>
+            </div>
         </div>
-        <div class="mt-6">
-            <button id="romantic-lock" class="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded btn">
-                Romantic 🔞 (Hold 3s to Unlock)
-            </button>
+
+        <div class="absolute top-4 right-4">
+            <button id="theme-toggle" class="text-2xl">🌙</button>
         </div>
     </div>
     <canvas id="confetti-canvas" class="absolute top-0 left-0 w-full h-full pointer-events-none"></canvas>
